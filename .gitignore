@@ -1,0 +1,15 @@
+# Python
+.venv
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+dist/
+
+# Env / OS
+.env
+.DS_Store
+
+# Uploads (optional – אם לא צריך לשמור CSVים)
+backend/uploads/

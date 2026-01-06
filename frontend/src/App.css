@@ -1,0 +1,274 @@
+:root {
+  --bg: #fff7ed;          /* לבן-אפרסק */
+  --panel: #ffffff;      /* לבן */
+  --border: #fde68a;     /* צהוב עדין */
+  --text: #3a2a14;       /* חום כהה */
+  --muted: #7c6f57;      /* חום בהיר */
+
+  --orange: #fb923c;     /* כתום */
+  --orange-strong: #f97316;
+  --yellow: #fde047;     /* צהוב */
+  --red: #ef4444;        /* אדום */
+
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 42px 18px 70px;
+}
+
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 6px;
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+
+.header h1 {
+  font-size: clamp(56px, 9vw, 88px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  
+}
+
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.subtitle code {
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fffaf0;
+  color: var(--text);
+}
+
+/* cards */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  margin: 14px 0;
+}
+
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+/* rows */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* inputs */
+input[type="file"] {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px dashed var(--border);
+  background: #fffaf0;
+  color: var(--muted);
+  width: min(520px, 100%);
+}
+
+/* textarea */
+.textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fffaf0;
+  color: var(--text);
+  resize: vertical;
+  outline: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 4px rgba(251,146,60,0.25);
+}
+
+/* buttons */
+button {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff7ed;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button.primary {
+  background: linear-gradient(180deg, var(--orange), var(--orange-strong));
+  border: 1px solid var(--orange-strong);
+  color: #ffffff;
+}
+
+button.primary:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* text helpers */
+.small {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.small code {
+  color: var(--text);
+}
+
+/* error */
+.error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #7f1d1d;
+}
+
+.muted {
+  color: var(--muted);
+  padding: 8px 2px;
+}
+
+/* table */
+.tableWrap {
+  margin-top: 10px;
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+}
+
+thead th {
+  background: #fef3c7;   /* צהוב */
+  color: #92400e;
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #fff3d6;
+}
+
+tbody tr:nth-child(even) td {
+  background: #fffbeb;  /* זברה צהבהבה */
+}
+
+/* responsive */
+@media (max-width: 720px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  table {
+    min-width: 520px;
+ 
+  }
+}
+/* fade-in animation */
+.fade-in {
+  opacity: 0;
+  animation: fadeUp 0.6s ease-out forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.delay-2 {
+  animation-delay: 0.2s;
+}
+
+.delay-3 {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.byline {
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.byline strong {
+  color: var(--orange-strong);
+  font-weight: 600;
+}
+/* --- Force centering layout --- */
+html, body {
+  width: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;   /* מרכז אופקית */
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* מרכז גם את העטיפה של React */
+}
+
+.page {
+  width: 100%;
+  max-width: 720px;          /* אפשר 780 אם בא לך טיפה יותר רחב */
+  margin: 0 auto;
+}
