@@ -4,24 +4,26 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import uuid
-from fastapi import HTTPException
 
 app = FastAPI()
 
-from fastapi.middleware.cors import CORSMiddleware
+FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN") 
+
+allow_origins = []
+if FRONTEND_ORIGIN:
+    allow_origins.append(FRONTEND_ORIGIN)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
+
 class QueryRequest(BaseModel):
     dataset_id: str
     sql: str
@@ -30,10 +32,9 @@ class QueryRequest(BaseModel):
 def health():
     return {"status": "ok"}
 
-
 @app.post("/upload")
 async def upload(file: UploadFile = File(...)):
-    if not file.filename.lower().endswith(".csv"):
+    if not file.filename or not file.filename.lower().endswith(".csv"):
         return {"error": "Please upload a .csv file"}
 
     dataset_id = str(uuid.uuid4())
@@ -47,33 +48,23 @@ async def upload(file: UploadFile = File(...)):
             f.write(chunk)
 
     return {"dataset_id": dataset_id}
+
 @app.post("/query")
 def query_csv(req: QueryRequest):
     csv_path = os.path.join(UPLOAD_DIR, f"{req.dataset_id}.csv")
-
     if not os.path.exists(csv_path):
         return {"error": "Dataset not found"}
 
     con = duckdb.connect()
-
     try:
-        # 1️⃣ Create a VIEW called "tablename"
         con.execute(f"""
             CREATE OR REPLACE VIEW tablename AS
             SELECT * FROM read_csv_auto('{csv_path}');
         """)
-
-        # 2️⃣ Execute exactly the SQL the user sent
         result = con.execute(req.sql).fetchall()
         columns = [d[0] for d in con.description]
-
-        return {
-            "columns": columns,
-            "rows": result
-        }
-
+        return {"columns": columns, "rows": result}
     except Exception as e:
         return {"error": str(e)}
-
     finally:
         con.close()

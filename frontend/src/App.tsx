@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import "./App.css";
-const API_BASE =
-  import.meta.env.VITE_API_BASE ;
+const API_BASE = import.meta.env.VITE_API_BASE;
+if (!API_BASE) {
+  throw new Error("Missing VITE_API_BASE env var");
+}
 
 type QueryResponse =
   | { columns: string[]; rows: any[][] }
