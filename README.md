@@ -4,6 +4,10 @@
 
 A full-stack application that allows uploading CSV files and querying them using SQL.
 
+**Run publicly**
+Frontend: https://artemis-csv-sql-explorer.vercel.app
+Backend: https://artemis-csv-sql-explorer-backend.onrender.com
+
 ## Features
 - Upload CSV files
 - Query data using SQL (DuckDB)
@@ -32,11 +36,14 @@ Artemis/
 
 
 ## How It Works
+1.User uploads a CSV file.
+2.Backend streams the file to disk and assigns a dataset_id.
+3.DuckDB creates a VIEW called tablename from the CSV.
+4.User runs SQL queries against tablename.
+5.Results are returned and displayed in the UI.
 
-1. The user uploads a CSV file
-2. The backend stores the file and creates a DuckDB VIEW named `tablename`
-3. The user writes SQL queries against `tablename`
-4. Results are returned and rendered in a table on the frontend
+## Example CSV
+SELECT * FROM tablename LIMIT 5;
 
 ## Example CSV
 
@@ -49,30 +56,3 @@ employee_id,name,department,salary,hire_date
 5,Eva Smith,Sales,102500,2022-05-03
 6,Frank Zhao,Engineering,132000,2020-09-30
 
-##Backend
-cd backend
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python -m uvicorn main:app --reload --port 8000
-Backend will run on:
-http://localhost:8000
-
-##Frontend
-cd frontend
-npm install
-npm run dev
-Frontend will run on:
-http://localhost:5173
-
-
-## API Endpoints
-POST /upload
-Uploads a CSV file and returns a dataset_id
-POST /query
-Runs a SQL query against the uploaded CSV using DuckDB
-Request body:
-{
-  "dataset_id": "string",
-  "sql": "SELECT * FROM tablename LIMIT 5"
-}
