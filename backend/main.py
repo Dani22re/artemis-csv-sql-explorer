@@ -8,13 +8,14 @@ from fastapi import HTTPException
 
 app = FastAPI()
 
-# allow Vite dev server to call the API during development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
 )
 
 UPLOAD_DIR = "uploads"
