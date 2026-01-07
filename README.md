@@ -6,6 +6,7 @@ A full-stack application that allows uploading CSV files and querying them using
 
 ## Run publicly
 Frontend: https://artemis-csv-sql-explorer.vercel.app
+
 Backend: https://artemis-csv-sql-explorer-backend.onrender.com
 
 ## Features
@@ -20,18 +21,31 @@ Backend: https://artemis-csv-sql-explorer-backend.onrender.com
 - **Database Engine:** DuckDB
 
 Artemis/
+
 ├── backend/
+
 │ ├── main.py
+
 │ ├── uploads/
+
 │ └── requirements.txt
+
 │
+
 ├── frontend/
+
 │ ├── src/
+
 │ │ ├── App.tsx
+
 │ │ ├── App.css
+
 │ │ └── main.tsx
+
 │ └── package.json
+
 │
+
 └── README.md
 
 
