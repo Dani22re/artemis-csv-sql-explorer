@@ -4,7 +4,7 @@
 
 A full-stack application that allows uploading CSV files and querying them using SQL.
 
-**Run publicly**
+## Run publicly
 Frontend: https://artemis-csv-sql-explorer.vercel.app
 Backend: https://artemis-csv-sql-explorer-backend.onrender.com
 
