@@ -4,7 +4,7 @@
 
 A full-stack application that allows uploading CSV files and querying them using SQL.
 
-## Run publicly
+## Run Publicly
 Frontend: https://artemis-csv-sql-explorer.vercel.app
 
 Backend: https://artemis-csv-sql-explorer-backend.onrender.com
@@ -20,40 +20,16 @@ Backend: https://artemis-csv-sql-explorer-backend.onrender.com
 - **Backend:** FastAPI, Python
 - **Database Engine:** DuckDB
 
-Artemis/
-
-├── backend/
-
-│ ├── main.py
-
-│ ├── uploads/
-
-│ └── requirements.txt
-
-│
-
-├── frontend/
-
-│ ├── src/
-
-│ │ ├── App.tsx
-
-│ │ ├── App.css
-
-│ │ └── main.tsx
-
-│ └── package.json
-
-│
-
-└── README.md
-
 
 ## How It Works
 1.User uploads a CSV file.
+
 2.Backend streams the file to disk and assigns a dataset_id.
+
 3.DuckDB creates a VIEW called tablename from the CSV.
+
 4.User runs SQL queries against tablename.
+
 5.Results are returned and displayed in the UI.
 
 ## Example CSV
